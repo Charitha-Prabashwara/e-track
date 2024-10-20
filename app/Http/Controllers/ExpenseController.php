@@ -36,4 +36,18 @@ class ExpenseController extends Controller
 
         return redirect()->route('expense.getAll')->with('success', 'Expense updated successfully');
     }
+
+     // Delete an expense
+     public function delete(Request $request)
+     {
+         $request->validate([
+             'id' => 'required|integer|exists:expenses,id',
+         ]);
+ 
+         $expense = Expense::findOrFail($request->id);
+         $expense->delete();
+ 
+         return redirect()->route('expense.getAll')->with('success', 'Expense deleted successfully');
+     }
+ 
 }
