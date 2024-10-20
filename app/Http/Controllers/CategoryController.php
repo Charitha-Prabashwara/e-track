@@ -19,4 +19,12 @@ class CategoryController extends Controller
         return redirect()->route('category.getAll')->with('success', 'Category created successfully');
     }
 
+    public function getAll()
+    {
+        $categories = Category::all();
+        return view('category.index', compact('categories'));
+    }
+
+
+
 }
