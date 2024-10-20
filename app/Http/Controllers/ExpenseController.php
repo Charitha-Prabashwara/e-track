@@ -49,5 +49,13 @@ class ExpenseController extends Controller
  
          return redirect()->route('expense.getAll')->with('success', 'Expense deleted successfully');
      }
+
+         // Get all expenses
+    public function getAll()
+    {
+        $expenses = Expense::all();
+        return view('expense.index', compact('expenses'));
+    }
+
  
 }
