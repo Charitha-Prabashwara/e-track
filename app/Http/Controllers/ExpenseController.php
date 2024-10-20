@@ -20,4 +20,20 @@ class ExpenseController extends Controller
         Expense::create($request->all());
         return redirect()->route('expense.getAll')->with('success', 'Expense created successfully');
     }
+
+    // Update an expense
+    public function update(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|integer|exists:expenses,id',
+            'title' => 'required|string|max:255',
+            'amount' => 'required|numeric',
+            'category' => 'required|integer|exists:categories,id',
+        ]);
+
+        $expense = Expense::findOrFail($request->id);
+        $expense->update($request->all());
+
+        return redirect()->route('expense.getAll')->with('success', 'Expense updated successfully');
+    }
 }
