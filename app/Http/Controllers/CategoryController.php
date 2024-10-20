@@ -39,6 +39,19 @@ class CategoryController extends Controller
          return redirect()->route('category.getAll')->with('success', 'Category updated successfully');
      }
 
+     public function delete(Request $request)
+     {
+         $request->validate([
+             'id' => 'required|integer|exists:categories,id',
+         ]);
+ 
+         $category = Category::findOrFail($request->id);
+         $category->delete();
+ 
+         return redirect()->route('category.getAll')->with('success', 'Category deleted successfully');
+     }
+ 
+
 
 
 }
