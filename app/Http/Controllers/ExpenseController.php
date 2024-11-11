@@ -12,14 +12,16 @@ class ExpenseController extends Controller
     // Create new expense
     public function create(Request $request)
     {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'amount' => 'required|numeric',
-            'category' => 'required|integer|exists:categories,id',
+
+
+        expense::create([
+            'title' => $request->title,
+            'category' => $request->category,
+            'amount' => $request->amount,
+
         ]);
 
-        Expense::create($request->all());
-        return redirect()->route('expense.getAll')->with('success', 'Expense created successfully');
+        return redirect()->route('expense.all');
     }
 
     // Update an expense
@@ -58,9 +60,21 @@ class ExpenseController extends Controller
         return view('viewExpense', compact('expenses'));
     }
 
+    public function getctAll(){
+        // Fetch all categories from the database
+        $categories = category::all();
+
+    // Pass the categories to the view
+    return view('createExpense', compact('categories'));
+    }
+
     public function getCategory($id){
         $categoty = category::find($id);
         return $category->name;
+    }
+
+    public function view(){
+        return view('createExpense');
     }
 
 

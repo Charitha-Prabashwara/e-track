@@ -6,7 +6,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ExpenseController::class, 'getAll'])->name('expense.all');
 Route::get('/category', [CategoryController::class, 'getAll'])->name('category.view');
+Route::get('createCategoryview', [CategoryController::class, 'view'])->name('category.create.view');
 
+Route::get('createExpenseview', [ExpenseController::class, 'getctAll'])->name('expense.create.view');
 //create new category route
 Route::post('createCategory', [CategoryController::class, 'create'])->name('category.create');
 //update category route

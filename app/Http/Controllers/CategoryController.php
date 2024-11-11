@@ -11,12 +11,13 @@ class CategoryController extends Controller
     // Create new category
     public function create(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
+
+
+        category::create([
+            'name' => $request->name,
         ]);
 
-        Category::create($request->all());
-        return redirect()->route('category.getAll')->with('success', 'Category created successfully');
+        return redirect()->route('category.view');
     }
 
     public function getAll()
@@ -24,6 +25,7 @@ class CategoryController extends Controller
         $categories = Category::all();
         return view('viewCategory', compact('categories'));
     }
+
 
      // Update a category
      public function update(Request $request)
@@ -49,6 +51,11 @@ class CategoryController extends Controller
          $category->delete();
 
          return redirect()->route('category.getAll')->with('success', 'Category deleted successfully');
+     }
+
+
+     public function view(){
+        return view('createCategory');
      }
 
 
