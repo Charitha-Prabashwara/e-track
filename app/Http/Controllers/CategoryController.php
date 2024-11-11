@@ -41,16 +41,13 @@ class CategoryController extends Controller
          return redirect()->route('category.view');
      }
 
-     public function delete(Request $request)
+     public function delete($id)
      {
-         $request->validate([
-             'id' => 'required|integer|exists:categories,id',
-         ]);
 
-         $category = Category::findOrFail($request->id);
+         $category = Category::findOrFail($id);
          $category->delete();
 
-         return redirect()->route('category.getAll')->with('success', 'Category deleted successfully');
+         return redirect()->route('category.view');
      }
 
 
@@ -61,6 +58,11 @@ class CategoryController extends Controller
      public function upview($id){
         $categories = category::find($id);
         return view('updateCategory', compact('categories'));
+     }
+
+     public function delview($id){
+        $categories = category::find($id);
+        return view('deleteCategory', compact('categories'));
      }
 
 

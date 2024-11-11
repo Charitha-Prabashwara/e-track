@@ -41,16 +41,13 @@ class ExpenseController extends Controller
     }
 
      // Delete an expense
-     public function delete(Request $request)
+     public function delete(Request $request, $id)
      {
-         $request->validate([
-             'id' => 'required|integer|exists:expenses,id',
-         ]);
 
-         $expense = Expense::findOrFail($request->id);
+         $expense = Expense::findOrFail($id);
          $expense->delete();
 
-         return redirect()->route('expense.getAll')->with('success', 'Expense deleted successfully');
+         return redirect()->route('expense.all');
      }
 
          // Get all expenses
@@ -81,6 +78,11 @@ class ExpenseController extends Controller
         $expense = expense::find($id);
         $categories = category::all();
         return view('updateExpense', compact('expense', 'categories'));
+    }
+
+    public function delview($id){
+        $expense = expense::find($id);
+        return view('deleteExpense', compact('expense'));
     }
 
 
