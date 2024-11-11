@@ -9,11 +9,11 @@
     <title>Narrow Jumbotron Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="{{ URL::asset('storage/editor.css') }}" rel="stylesheet">
+<link href="{{ URL::asset('storage/editor.css') }}" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="{{ URL::asset('storage/narrow-jumbotron.css') }}" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<!-- Custom styles for this template -->
+<link href="{{ URL::asset('storage/narrow-jumbotron.css') }}" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   </head>
 
   <body>
@@ -23,11 +23,11 @@
         <nav>
           <ul class="nav nav-pills float-right">
             <li class="nav-item">
-              <a class="nav-link active" href="{{route('expense.all')}}">View expense<br><span class="sr-only">(current)</span></a>
+              <a class="nav-link active" href="#">View expense<br><span class="sr-only">(current)</span></a>
             </li>
-            <!-- <li class="nav-item">
+            <li class="nav-item">
               <a class="nav-link" href="#">Category</a>
-            </li> -->
+            </li>
             <li class="nav-item">
 
             </li>
@@ -38,44 +38,32 @@
 
       <div class="jumbotron" style="padding-top: 10px; padding-right: 10px; padding-bottom: 10px; background-color: rgb(240, 247, 255);">
 
-        <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">ID</th>
-                <th scope="col">TITLE</th>
+        <form class="form-horizontal" method="POST" action="{{route('category.change', ['id' => $categories->id])}}">
+            @csrf
+          <fieldset>
 
-              </tr>
-            </thead>
-            <tbody>
-              @foreach($categories as $ctg)
-              <tr>
-                <th scope="row">{{$ctg->id}}</th>
-                <td>{{$ctg->name}}</td>
-                <td><a class="nav-link" href="{{route('category.update.view', ['id' => $ctg->id])}}">update</a</td>
+          <!-- Form Name -->
+          <legend>Update Category</legend>
 
-              </tr>
-              @endforeach
+          <!-- Text input-->
+          <div class="form-group form-inline">
+            <label class="control-label" for="textinput">Title</label>
+            <input id="textinput" name="name" type="text" placeholder="" class="form-control input-md  w-100" required="" value="{{$categories->name}}">
 
-            </tbody>
-          </table>
+          </div>
+
+          <!-- Button (Double) -->
+          <div class="form-group form-inline">
+
+              <button id="button1id" name="submit" class="btn btn-success mr-3">Save</button>
+
+
+          </div>
+
+          </fieldset>
+          </form>
 
       </div>
-
-
-
-
-
-        <div class="col-lg-6">
-
-
-
-
-
-
-
-
-        </div>
-
 
       <footer class="footer">
         <p>©&nbsp;SWT22022: Practical for Internet Application Development</p>

@@ -25,19 +25,19 @@ class ExpenseController extends Controller
     }
 
     // Update an expense
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         $request->validate([
-            'id' => 'required|integer|exists:expenses,id',
+
             'title' => 'required|string|max:255',
             'amount' => 'required|numeric',
             'category' => 'required|integer|exists:categories,id',
         ]);
 
-        $expense = Expense::findOrFail($request->id);
+        $expense = Expense::findOrFail($id);
         $expense->update($request->all());
 
-        return redirect()->route('expense.getAll')->with('success', 'Expense updated successfully');
+        return redirect()->route('expense.all');
     }
 
      // Delete an expense
@@ -75,6 +75,12 @@ class ExpenseController extends Controller
 
     public function view(){
         return view('createExpense');
+    }
+
+    public function upview($id){
+        $expense = expense::find($id);
+        $categories = category::all();
+        return view('updateExpense', compact('expense', 'categories'));
     }
 
 
