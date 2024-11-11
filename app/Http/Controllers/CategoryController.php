@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use app\Models\category;
+use App\Models\category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -22,7 +22,7 @@ class CategoryController extends Controller
     public function getAll()
     {
         $categories = Category::all();
-        return view('category.index', compact('categories'));
+        return view('viewCategory', compact('categories'));
     }
 
      // Update a category
@@ -32,10 +32,10 @@ class CategoryController extends Controller
              'id' => 'required|integer|exists:categories,id',
              'name' => 'required|string|max:255',
          ]);
- 
+
          $category = Category::findOrFail($request->id);
          $category->update($request->all());
- 
+
          return redirect()->route('category.getAll')->with('success', 'Category updated successfully');
      }
 
@@ -44,13 +44,13 @@ class CategoryController extends Controller
          $request->validate([
              'id' => 'required|integer|exists:categories,id',
          ]);
- 
+
          $category = Category::findOrFail($request->id);
          $category->delete();
- 
+
          return redirect()->route('category.getAll')->with('success', 'Category deleted successfully');
      }
- 
+
 
 
 

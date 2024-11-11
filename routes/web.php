@@ -4,9 +4,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ExpenseController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', [ExpenseController::class, 'getAll'])->name('expense.all');
+Route::get('/category', [CategoryController::class, 'getAll'])->name('category.view');
 
 //create new category route
 Route::post('createCategory', [CategoryController::class, 'create'])->name('category.create');
