@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
@@ -25,9 +26,9 @@
             <li class="nav-item">
               <a class="nav-link active" href="{{route('expense.all')}}">View expense<br><span class="sr-only">(current)</span></a>
             </li>
-            <!-- <li class="nav-item">
-              <a class="nav-link" href="#">Category</a>
-            </li> -->
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('category.view')}}">Category</a>
+            </li>
             <li class="nav-item">
 
             </li>
@@ -38,25 +39,34 @@
 
       <div class="jumbotron" style="padding-top: 10px; padding-right: 10px; padding-bottom: 10px; background-color: rgb(240, 247, 255);">
 
-        <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">ID</th>
-                <th scope="col">TITLE</th>
+        <form class="form-horizontal" method="POST" action="{{route('category.create')}}">
+        @csrf
+          <fieldset>
 
-              </tr>
-            </thead>
-            <tbody>
-              @foreach($categories as $ctg)
-              <tr>
-                <th scope="row">{{$ctg->id}}</th>
-                <td>{{$ctg->name}}</td>
+          <!-- Form Name -->
+          <legend>Create Category</legend>
 
-              </tr>
-              @endforeach
+          <!-- Text input-->
+          <div class="form-group form-inline">
+            <label class="control-label" for="name">Category name</label>
+            <input id="name" name="name" type="text" placeholder="" class="form-control input-md  w-100" required="">
 
-            </tbody>
-          </table>
+
+          </div>
+
+
+
+
+          <!-- Button (Double) -->
+          <div class="form-group form-inline">
+
+              <button id="submit" type="submit" name="submit" class="btn btn-success mr-3">Create</button>
+
+
+          </div>
+
+          </fieldset>
+          </form>
 
       </div>
 
@@ -64,16 +74,6 @@
 
 
 
-        <div class="col-lg-6">
-
-
-
-
-
-
-
-
-        </div>
 
 
       <footer class="footer">
