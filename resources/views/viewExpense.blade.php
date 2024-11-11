@@ -57,6 +57,7 @@
                 <td>{{ $expens->title}}</td>
                 <td>{{ $expens->amount}}</td>
                 <td>{{ $expens->category}}</td>
+                <td><a class="nav-link" href="{{route('expense.update.view', ['id' => $expens->id])}}">update</a</td>
               </tr>
               @endforeach
             </tbody>

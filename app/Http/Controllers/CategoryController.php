@@ -28,17 +28,17 @@ class CategoryController extends Controller
 
 
      // Update a category
-     public function update(Request $request)
+     public function update(Request $request, $id)
      {
          $request->validate([
-             'id' => 'required|integer|exists:categories,id',
+
              'name' => 'required|string|max:255',
          ]);
 
          $category = Category::findOrFail($request->id);
          $category->update($request->all());
 
-         return redirect()->route('category.getAll')->with('success', 'Category updated successfully');
+         return redirect()->route('category.view');
      }
 
      public function delete(Request $request)
@@ -53,14 +53,16 @@ class CategoryController extends Controller
          return redirect()->route('category.getAll')->with('success', 'Category deleted successfully');
      }
 
-<<<<<<< HEAD
-=======
 
      public function view(){
         return view('createCategory');
      }
 
->>>>>>> ebb63f5166c4a7c9625ceeb17449f188813fc9ee
+     public function upview($id){
+        $categories = category::find($id);
+        return view('updateCategory', compact('categories'));
+     }
+
 
 
 

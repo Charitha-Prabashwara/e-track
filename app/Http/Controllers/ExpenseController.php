@@ -25,19 +25,19 @@ class ExpenseController extends Controller
     }
 
     // Update an expense
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         $request->validate([
-            'id' => 'required|integer|exists:expenses,id',
+
             'title' => 'required|string|max:255',
             'amount' => 'required|numeric',
             'category' => 'required|integer|exists:categories,id',
         ]);
 
-        $expense = Expense::findOrFail($request->id);
+        $expense = Expense::findOrFail($id);
         $expense->update($request->all());
 
-        return redirect()->route('expense.getAll')->with('success', 'Expense updated successfully');
+        return redirect()->route('expense.all');
     }
 
      // Delete an expense
@@ -60,8 +60,6 @@ class ExpenseController extends Controller
         return view('viewExpense', compact('expenses'));
     }
 
-<<<<<<< HEAD
-=======
     public function getctAll(){
         // Fetch all categories from the database
         $categories = category::all();
@@ -70,18 +68,20 @@ class ExpenseController extends Controller
     return view('createExpense', compact('categories'));
     }
 
->>>>>>> ebb63f5166c4a7c9625ceeb17449f188813fc9ee
     public function getCategory($id){
         $categoty = category::find($id);
         return $category->name;
     }
 
-<<<<<<< HEAD
-=======
     public function view(){
         return view('createExpense');
     }
 
->>>>>>> ebb63f5166c4a7c9625ceeb17449f188813fc9ee
+    public function upview($id){
+        $expense = expense::find($id);
+        $categories = category::all();
+        return view('updateExpense', compact('expense', 'categories'));
+    }
+
 
 }
