@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use app\Models\expense;
+use App\Models\expense;
+use App\Models\category;
 use Illuminate\Http\Request;
 
 class ExpenseController extends Controller
 {
-    
+
     // Create new expense
     public function create(Request $request)
     {
@@ -43,19 +44,24 @@ class ExpenseController extends Controller
          $request->validate([
              'id' => 'required|integer|exists:expenses,id',
          ]);
- 
+
          $expense = Expense::findOrFail($request->id);
          $expense->delete();
- 
+
          return redirect()->route('expense.getAll')->with('success', 'Expense deleted successfully');
      }
 
          // Get all expenses
     public function getAll()
     {
-        $expenses = Expense::all();
-        return view('expense.index', compact('expenses'));
+        $expenses = expense::with('category')->get();
+        return view('viewExpense', compact('expenses'));
     }
 
- 
+    public function getCategory($id){
+        $categoty = category::find($id);
+        return $category->name;
+    }
+
+
 }
