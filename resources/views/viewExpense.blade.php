@@ -24,8 +24,11 @@
         <nav>
           <ul class="nav nav-pills float-right">
             <li class="nav-item">
-              <a class="nav-link active" href="#">New expense<br><span class="sr-only">(current)</span></a>
+              <a class="nav-link active" href="{{route('expense.create.view')}}">Create expense<br><span class="sr-only">(current)</span></a>
             </li>
+
+            
+
             <li class="nav-item">
               <a class="nav-link" href="{{route('category.view')}}">Category</a>
             </li>

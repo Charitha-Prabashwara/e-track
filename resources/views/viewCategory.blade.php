@@ -28,6 +28,10 @@
             <!-- <li class="nav-item">
               <a class="nav-link" href="#">Category</a>
             </li> -->
+
+            <li class="nav-item">
+              <a class="nav-link active" href="{{route('category.create.view')}}">Create Category<br><span class="sr-only">(current)</span></a>
+            </li>
             <li class="nav-item">
 
             </li>
