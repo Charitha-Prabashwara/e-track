@@ -10,6 +10,7 @@ class expense extends Model
     /** @use HasFactory<\Database\Factories\ExpenseFactory> */
     use HasFactory;
     protected $table = 'expenses';
+    protected $fillable = ['title'];
     public function category()
     {
         return $this->belongsTo(Category::class);
